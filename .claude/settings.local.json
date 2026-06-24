@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --version)",
+      "Bash(cd \"c:/Users/SERGETRADING/Documents/Claude Code/website\" && mv CLAUDE.md ../CLAUDE.md.bak && echo \"moved\" && ls -la)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --yes)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\SERGETRADING\\Documents\\Claude Code"
+    ]
+  }
+}
