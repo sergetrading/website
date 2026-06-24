@@ -1,0 +1,33 @@
+services:
+  # ----------------------------------------------------------------------
+  # Caddy = Reverse-Proxy + automatisches HTTPS (Let's Encrypt)
+  # Konfiguration siehe ./Caddyfile. Kein Docker-Socket nötig.
+  # ----------------------------------------------------------------------
+  caddy:
+    build:
+      context: .
+      dockerfile: Dockerfile.caddy
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+
+  # ----------------------------------------------------------------------
+  # Die Next.js-Website (Standalone-Server, intern Port 3000, hinter Caddy)
+  # ----------------------------------------------------------------------
+  web:
+    build: .
+    container_name: website
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  caddy_data:
+  caddy_config:
