@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: website
+    restart: unless-stopped
+    ports:
+      # Links der Host-Port (von außen erreichbar), rechts der Container-Port.
+      # "80:3000" = direkt unter http://<deine-domain> erreichbar.
+      # Falls auf dem VPS bereits etwas auf Port 80 läuft (z.B. ein
+      # Reverse-Proxy), stattdessen z.B. "3000:3000" verwenden.
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
