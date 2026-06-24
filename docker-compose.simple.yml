@@ -1,0 +1,15 @@
+services:
+  # Next.js-Website als Standalone-Server.
+  # Läuft intern auf Port 3000 und wird direkt auf Port 80 veröffentlicht,
+  # also erreichbar unter http://<deine-VPS-IP>.
+  #
+  # HTTPS / Reverse-Proxy: siehe docker-compose.traefik.yml — die Variante
+  # nutzen, sobald eine Domain auf den VPS zeigt (Details in DEPLOY.md).
+  web:
+    build: .
+    container_name: website
+    restart: unless-stopped
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
