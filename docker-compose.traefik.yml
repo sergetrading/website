@@ -1,0 +1,64 @@
+services:
+  # ----------------------------------------------------------------------
+  # Traefik = Reverse-Proxy + automatisches HTTPS (Let's Encrypt)
+  # ----------------------------------------------------------------------
+  traefik:
+    image: traefik:v3.1
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      # Docker als Konfigurationsquelle (liest die Labels der web-Services)
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      # Eingänge: HTTP (80) und HTTPS (443)
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      # Let's Encrypt: Zertifikate per TLS-Challenge automatisch holen
+      - --certificatesresolvers.le.acme.email=${ACME_EMAIL:-sergej.hoffmann@gmail.com}
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - letsencrypt:/letsencrypt
+
+  # ----------------------------------------------------------------------
+  # Die Next.js-Website (läuft intern auf Port 3000, hinter Traefik)
+  # ----------------------------------------------------------------------
+  web:
+    build: .
+    container_name: website
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.web.loadbalancer.server.port=3000
+
+      # (1) HTTP-Catch-all: macht die Seite SOFORT per VPS-IP erreichbar,
+      #     auch ohne Domain. Niedrige Priorität, damit die Domain-Regeln
+      #     unten Vorrang haben, sobald eine Domain gesetzt ist.
+      - traefik.http.routers.web-http.rule=PathPrefix(`/`)
+      - traefik.http.routers.web-http.entrypoints=web
+      - traefik.http.routers.web-http.priority=1
+
+      # (2) HTTPS für die Domain. Wird erst aktiv, sobald DOMAIN gesetzt ist
+      #     (bei leerem DOMAIN ist die Regel ungültig -> Router wird
+      #     ignoriert, es wird KEIN Zertifikat angefragt).
+      - traefik.http.routers.web-https.rule=Host(`${DOMAIN:-}`)
+      - traefik.http.routers.web-https.entrypoints=websecure
+      - traefik.http.routers.web-https.priority=10
+      - traefik.http.routers.web-https.tls=true
+      - traefik.http.routers.web-https.tls.certresolver=le
+
+      # (3) HTTP -> HTTPS Weiterleitung für die Domain
+      - traefik.http.routers.web-redirect.rule=Host(`${DOMAIN:-}`)
+      - traefik.http.routers.web-redirect.entrypoints=web
+      - traefik.http.routers.web-redirect.priority=10
+      - traefik.http.routers.web-redirect.middlewares=to-https
+      - traefik.http.middlewares.to-https.redirectscheme.scheme=https
+
+volumes:
+  letsencrypt:
