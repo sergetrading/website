@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx --version)",
       "Bash(cd \"c:/Users/SERGETRADING/Documents/Claude Code/website\" && mv CLAUDE.md ../CLAUDE.md.bak && echo \"moved\" && ls -la)",
-      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --yes)"
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --yes)",
+      "Bash(curl -s -o /dev/null -w \"/ -> %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"/demo -> %{http_code}\\\\n\" http://localhost:3000/demo)"
     ],
     "additionalDirectories": [
       "c:\\Users\\SERGETRADING\\Documents\\Claude Code"
