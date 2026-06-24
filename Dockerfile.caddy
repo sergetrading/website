@@ -1,4 +1,0 @@
-# Eigenes Caddy-Image mit fest eingebautem Caddyfile.
-# Vermeidet Bind-Mounts (die auf Hostingers Docker Manager scheitern).
-FROM caddy:2-alpine
-COPY Caddyfile /etc/caddy/Caddyfile
