@@ -1,7 +1,39 @@
 "use client";
 
-import React, { useRef, useEffect, Suspense } from "react";
+import React, { useRef, useEffect, useState, Suspense } from "react";
 import * as THREE from "three";
+
+/**
+ * Scroll-linked progress for the first viewport (0 at top -> 1 after one
+ * screen). Dependency-free: a passive scroll listener throttled with rAF, so it
+ * only touches `transform`/`opacity` and stays on the GPU compositor. Honours
+ * `prefers-reduced-motion` by pinning progress at 0 (no movement).
+ */
+function useHeroScroll() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const h = window.innerHeight || 1;
+        setProgress(Math.min(1, Math.max(0, window.scrollY / h)));
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return progress;
+}
 
 export function GenerativeArtScene() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -180,32 +212,37 @@ export function AnomalousMatterHero({
   subtitle = "Matter in a state of constant, beautiful flux.",
   description = "A new form of digital existence has been observed. It responds to stimuli, changes form, and exudes an unknown energy. Further study is required.",
 }: AnomalousMatterHeroProps) {
+  const p = useHeroScroll();
+
   return (
     <section
       role="banner"
       className="relative w-full h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))] overflow-hidden"
     >
-      <Suspense fallback={<div className="w-full h-full bg-[hsl(var(--background))]" />}>
-        <GenerativeArtScene />
-      </Suspense>
+      {/* 3D scene gently zooms + drifts and dissolves into the black as you scroll */}
+      <div
+        className="absolute inset-0 z-0 will-change-transform"
+        style={{
+          transform: `scale(${1 + p * 0.14}) translateY(${p * 6}vh)`,
+          opacity: 1 - p * 0.7,
+        }}
+      >
+        <Suspense fallback={<div className="w-full h-full bg-[hsl(var(--background))]" />}>
+          <GenerativeArtScene />
+        </Suspense>
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background)/0.7)] to-transparent z-10" />
 
-      {/* Brand wordmark */}
-      <div
-        className="absolute top-0 inset-x-0 z-20 flex flex-col items-center pt-10 md:pt-14 text-center"
-        style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
-      >
-        <span className="text-2xl md:text-4xl font-bold uppercase tracking-[0.4em] leading-none text-[hsl(var(--foreground))]">
-          Crestmont
-        </span>
-        <span className="mt-3 text-[0.625rem] md:text-xs font-light uppercase tracking-[0.8em] text-[hsl(var(--gray-300)/0.8)]">
-          Consulting&nbsp;&nbsp;Ltd
-        </span>
-      </div>
-
       <div className="relative z-20 flex flex-col items-center justify-end h-full pb-20 md:pb-32 text-center">
-        <div className="max-w-3xl px-4 animate-fade-in-long">
+        <div
+          className="will-change-transform"
+          style={{
+            transform: `translateY(${-p * 12}vh)`,
+            opacity: 1 - Math.min(1, p * 1.4),
+          }}
+        >
+          <div className="max-w-3xl px-4 animate-fade-in-long">
           <h1 className="text-sm font-mono tracking-widest text-[hsl(var(--sky-300)/0.8)] uppercase">
             {title}
           </h1>
@@ -215,6 +252,7 @@ export function AnomalousMatterHero({
           <p className="mt-6 max-w-xl mx-auto text-base leading-relaxed text-[hsl(var(--gray-300)/0.8)]">
             {description}
           </p>
+          </div>
         </div>
       </div>
     </section>
