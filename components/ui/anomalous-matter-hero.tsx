@@ -255,6 +255,33 @@ export function AnomalousMatterHero({
           </div>
         </div>
       </div>
+
+      {/* Scroll cue — gently pulses, fades out as soon as the user scrolls */}
+      <div
+        className="absolute inset-x-0 bottom-7 z-20 flex flex-col items-center gap-3 pointer-events-none"
+        style={{ opacity: Math.max(0, 1 - p * 3) }}
+        aria-hidden
+      >
+        <span
+          className="text-[0.625rem] font-light uppercase tracking-[0.5em] text-[hsl(var(--gray-300)/0.6)]"
+          style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+        >
+          Scroll
+        </span>
+        <svg
+          className="animate-scroll-cue motion-reduce:animate-none"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="hsl(var(--gray-300) / 0.7)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </div>
     </section>
   );
 }

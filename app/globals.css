@@ -40,3 +40,19 @@ body {
 .animate-fade-in-long {
   animation: fadeIn 1.5s ease-out forwards;
 }
+
+@keyframes scrollCue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+.animate-scroll-cue {
+  animation: scrollCue 1.8s ease-in-out infinite;
+}
