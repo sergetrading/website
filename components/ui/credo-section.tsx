@@ -4,35 +4,48 @@ import React from "react";
 import { MaskReveal, Reveal } from "@/components/ui/motion";
 
 /**
- * The credo — a quiet authority beat that interrupts the rhythm of the rail
- * sections (About / Services / Contact all share the left-eyebrow + right-column
- * grid). This one is centred, set in a single large Fraunces statement on a lot
- * of black: a pause, not a pitch. Authority by restraint, never by bragging —
- * which is why there are no logos, numbers, or client claims here, only a maxim
- * the brand stands behind.
+ * The credo — the page's single typographic crescendo.
  *
- * Lives inside <ThreadedSections>, so the brass thread keeps drawing straight
- * through it.
+ * Everything else whispers at a steady text-4xl/5xl; this one beat is allowed
+ * to be loud: a clamped display size that runs larger than any other headline,
+ * centred on a lot of black, opened by an oversized Fraunces quotation mark set
+ * in solid brass — the one place besides the founder's signature where the
+ * accent is fully present rather than a hairline. A faint warm halo lifts the
+ * ground just enough to read as a stage. Authority by restraint, not bragging:
+ * no logos, no numbers, only a maxim the brand stands behind.
  */
 export function CredoSection() {
   return (
     <section
       id="credo"
-      className="relative w-full overflow-hidden bg-[hsl(var(--background))] py-40 text-[hsl(var(--foreground))] md:py-64"
+      className="relative w-full overflow-hidden bg-[hsl(var(--background))] py-44 text-[hsl(var(--foreground))] md:py-72"
     >
       {/* brass hairline — same thread that tops every section */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--brass)/0.4)] to-transparent" />
 
-      <div className="relative mx-auto max-w-4xl px-6 text-center md:px-10">
-        {/* a single short brass mark to open — the thread, gathered to a point */}
+      {/* warm halo — the stage under the crescendo. Felt, not seen. */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 42%, hsl(var(--brass) / 0.06), transparent 70%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-5xl px-6 text-center md:px-10">
+        {/* Oversized opening quote — solid brass, set in Fraunces like inked
+            display type. Pulled tight to the quote it opens. */}
         <Reveal>
           <span
-            className="mx-auto mb-12 block h-px w-10 bg-[hsl(var(--brass)/0.6)]"
+            className="block select-none font-serif text-[5rem] leading-[0.6] text-[hsl(var(--brass))] md:text-[7rem]"
             aria-hidden
-          />
+          >
+            &ldquo;
+          </span>
         </Reveal>
 
-        <blockquote className="font-serif text-3xl font-normal leading-[1.18] tracking-[-0.015em] md:text-[2.75rem] md:leading-[1.16]">
+        <blockquote className="mt-6 text-balance font-serif font-normal leading-[1.16] tracking-[-0.015em] text-[clamp(1.7rem,4.2vw,3rem)]">
           <MaskReveal delay={80}>The decisions that matter are made</MaskReveal>
           <MaskReveal delay={170}>by a few, under real weight —</MaskReveal>
           <MaskReveal delay={260}>and judged not by the noise they make,</MaskReveal>
@@ -43,10 +56,10 @@ export function CredoSection() {
 
         <Reveal delay={460}>
           <span
-            className="mt-12 block text-xs font-light uppercase tracking-[0.45em] text-[hsl(var(--gray-300)/0.7)]"
+            className="mt-14 block text-xs font-light uppercase tracking-[0.45em] text-[hsl(var(--gray-300)/0.7)]"
             style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
           >
-            — Crestmont
+            &mdash; Crestmont
           </span>
         </Reveal>
       </div>

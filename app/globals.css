@@ -14,6 +14,10 @@
     underline draw), never as fill.
   */
   --background: 36 16% 4%; /* #0b0a08 — warm near-black */
+  /* A hair lifted off the base black — used as a "stage" under one section so
+     the page reads as space being moved through, not one flat sheet. The shift
+     is ~3% lightness: felt, not seen. */
+  --background-raised: 36 14% 7%; /* #14110d */
   --foreground: 40 30% 95%; /* #f6f3ec — ivory */
   --sky-300: 40 30% 95%; /* hero accent text — ivory */
   --gray-300: 40 8% 70%; /* warm neutral for body copy */
@@ -22,6 +26,7 @@
 
 @theme inline {
   --color-background: hsl(var(--background));
+  --color-background-raised: hsl(var(--background-raised));
   --color-foreground: hsl(var(--foreground));
   --color-brass: hsl(var(--brass));
   --font-sans: var(--font-geist-sans);
