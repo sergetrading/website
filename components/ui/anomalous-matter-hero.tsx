@@ -246,7 +246,7 @@ export function AnomalousMatterHero({
           <h1 className="text-sm font-mono tracking-widest text-[hsl(var(--sky-300)/0.8)] uppercase">
             {title}
           </h1>
-          <p className="mt-4 text-3xl md:text-5xl font-bold leading-tight">
+          <p className="mt-4 font-serif text-3xl md:text-5xl font-normal leading-[1.08] tracking-[-0.02em]">
             {subtitle}
           </p>
           <p className="mt-6 max-w-xl mx-auto text-base leading-relaxed text-[hsl(var(--gray-300)/0.8)]">

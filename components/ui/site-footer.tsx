@@ -11,8 +11,8 @@ const LEGAL = [
 export function SiteFooter() {
   return (
     <footer className="relative w-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))] overflow-hidden">
-      {/* faint top hairline to match the section dividers above */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--gray-300)/0.2)] to-transparent" />
+      {/* brass hairline to match the section dividers above */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--brass)/0.4)] to-transparent" />
 
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-20">
         {/* copyright & legal */}
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.6)] transition-colors duration-300 hover:text-[hsl(var(--foreground))]"
+                className="text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.6)] transition-colors duration-300 hover:text-[hsl(var(--brass))]"
               >
                 {item.label}
               </a>
