@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function LegalNoticePage() {
   return (
     <LegalLayout title="Legal Notice">
-      <p className="text-sm text-[hsl(var(--gray-300)/0.6)]">
+      <p className="text-sm text-[hsl(var(--gray-300)/0.7)]">
         Note: fields shown with a <Placeholder>highlight</Placeholder> are
         placeholders and must be replaced with your real details before going
         live.

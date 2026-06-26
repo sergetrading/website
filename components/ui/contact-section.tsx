@@ -48,7 +48,7 @@ export function ContactSection() {
             />
 
             <span
-              className="block text-[0.625rem] font-light uppercase tracking-[0.45em] text-[hsl(var(--gray-300)/0.6)]"
+              className="block text-[0.625rem] font-light uppercase tracking-[0.45em] text-[hsl(var(--gray-300)/0.7)]"
               style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
             >
               Enquiries
@@ -77,7 +77,7 @@ export function ContactSection() {
 
             {/* structured footer — location and availability, hairline-split */}
             <div
-              className="flex items-center justify-center gap-4 text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.55)]"
+              className="flex items-center justify-center gap-4 text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.72)]"
               style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
             >
               <span>Paphos, Cyprus</span>

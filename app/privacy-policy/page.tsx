@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <LegalLayout title="Privacy Policy">
-      <p className="text-sm text-[hsl(var(--gray-300)/0.6)]">
+      <p className="text-sm text-[hsl(var(--gray-300)/0.7)]">
         Note: this is a scaffold. Fields shown with a{" "}
         <Placeholder>highlight</Placeholder> are placeholders. Please have it
         reviewed and adapt it to your actual data processing before going live.

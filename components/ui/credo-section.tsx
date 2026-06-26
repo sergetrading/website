@@ -43,7 +43,7 @@ export function CredoSection() {
 
         <Reveal delay={460}>
           <span
-            className="mt-12 block text-xs font-light uppercase tracking-[0.45em] text-[hsl(var(--gray-300)/0.6)]"
+            className="mt-12 block text-xs font-light uppercase tracking-[0.45em] text-[hsl(var(--gray-300)/0.7)]"
             style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
           >
             — Crestmont

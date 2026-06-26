@@ -20,7 +20,7 @@ export function SiteFooter() {
           className="flex flex-col items-center gap-4 text-center md:flex-row md:justify-between"
           style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
         >
-          <p className="text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.45)]">
+          <p className="text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.7)]">
             © 2026 Crestmont Consulting Ltd. All rights reserved.
           </p>
 
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.6)] transition-colors duration-300 hover:text-[hsl(var(--brass))]"
+                className="text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.7)] transition-colors duration-300 hover:text-[hsl(var(--brass))]"
               >
                 {item.label}
               </a>
@@ -42,7 +42,7 @@ export function SiteFooter() {
 
         {/* Colophon — the quiet maker's note that signals craft. */}
         <p
-          className="mt-10 text-center text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.32)]"
+          className="mt-10 text-center text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.7)]"
           style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
         >
           Set in Fraunces &amp; Montserrat · Paphos, Cyprus

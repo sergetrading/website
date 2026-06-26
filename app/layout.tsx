@@ -76,6 +76,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${fraunces.variable} ${signature.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* No-JS safety net: scroll-reveal elements render hidden until Framer
+            animates them, so without JS they must be forced visible. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important;filter:none !important;}`}</style>
+        </noscript>
         {children}
         <Atmosphere />
       </body>

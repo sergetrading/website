@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[hsl(var(--background))] px-6 text-center text-[hsl(var(--foreground))]">
       <span
-        className="text-xs font-light uppercase tracking-[0.5em] text-[hsl(var(--gray-300)/0.6)]"
+        className="text-xs font-light uppercase tracking-[0.5em] text-[hsl(var(--gray-300)/0.7)]"
         style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
       >
         Error 404
