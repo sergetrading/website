@@ -45,8 +45,9 @@ const signature = Herr_Von_Muellerhoff({
 });
 
 export const metadata: Metadata = {
-  title: "Observation Log: Anomaly 7",
-  description: "Matter in a state of constant, beautiful flux.",
+  title: "Crestmont Consulting — Strategy · Advisory · Transformation",
+  description:
+    "Crestmont Consulting partners with a small circle of founders and decision-makers to sharpen strategy, unlock growth, and deliver change that lasts.",
 };
 
 export default function RootLayout({

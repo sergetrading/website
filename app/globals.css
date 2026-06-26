@@ -29,10 +29,75 @@
   --font-serif: var(--font-fraunces);
 }
 
+html {
+  /* Smooth in-page travel, but never fight a header: anchors stop clear of the
+     fixed wordmark. Disabled under reduced-motion below. */
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+
+  /* Hairline brass scrollbar — Firefox. WebKit handled separately below. */
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--brass) / 0.28) transparent;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* Real kerning + contextual ligatures everywhere — the quiet polish that
+     separates set type from rendered text. */
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  /* Progressive enhancement (Safari): pull opening quotes into the margin. */
+  hanging-punctuation: first last;
+}
+
+/* Headlines never break to a lonely orphan word — balanced ragging reads as
+   typeset, not reflowed. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* The single chromatic note carries through to selection — no browser blue. */
+::selection {
+  background: hsl(var(--brass) / 0.9);
+  color: hsl(var(--background));
+}
+
+/* Consistent, on-brand focus ring for keyboard users. */
+:focus-visible {
+  outline: 1px solid hsl(var(--brass) / 0.8);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* WebKit scrollbar — thin, warm, almost subliminal. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--brass) / 0.22);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--brass) / 0.42);
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @keyframes fadeIn {
