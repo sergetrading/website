@@ -52,7 +52,10 @@ export function GenerativeArtScene() {
         pointLightPos: { value: new THREE.Vector3(0, 0, 5) },
         // THREE.Color cannot parse a CSS custom property, so we pass the
         // resolved --sky-300 (white) value directly.
-        color: { value: new THREE.Color("hsl(0, 0%, 100%)") },
+        // Brass, not cold white — the hero is now made of the same single
+        // accent as the rest of the site, so it reads as an engraved instrument
+        // rather than a sci-fi render. (#c4a978 = the --brass token.)
+        color: { value: new THREE.Color("#c4a978") },
       },
       vertexShader: `
         uniform float time;
@@ -110,7 +113,9 @@ export function GenerativeArtScene() {
         void main() {
             vNormal = normal;
             vPosition = position;
-            float displacement = snoise(position * 2.0 + time * 0.5) * 0.2;
+            // Calmer amplitude + slower march: the form breathes, it no longer
+            // writhes. Reads as a precision object turning, not living matter.
+            float displacement = snoise(position * 2.0 + time * 0.32) * 0.13;
             vec3 newPosition = position + normal * displacement;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
         }`,
@@ -125,11 +130,13 @@ export function GenerativeArtScene() {
             vec3 lightDir = normalize(pointLightPos - vPosition);
             float diffuse = max(dot(normal, lightDir), 0.0);
 
-            // Fresnel effect for the glow
+            // Fresnel rim — a polished-brass edge highlight.
             float fresnel = 1.0 - dot(normal, vec3(0.0, 0.0, 1.0));
             fresnel = pow(fresnel, 2.0);
 
-            vec3 finalColor = color * diffuse + color * fresnel * 0.5;
+            // Faint ambient floor so the brass lines never sink fully to black:
+            // the engraving stays continuous, lit lines just catch more gold.
+            vec3 finalColor = color * (diffuse * 0.82 + 0.18) + color * fresnel * 0.45;
 
             gl_FragColor = vec4(finalColor, 1.0);
         }`,
@@ -150,14 +157,16 @@ export function GenerativeArtScene() {
     let running = false;
 
     const renderOnce = (t: number) => {
-      material.uniforms.time.value = t * 0.0003;
+      material.uniforms.time.value = t * 0.0002;
       renderer.render(scene, camera);
     };
 
     const animate = (t: number) => {
-      material.uniforms.time.value = t * 0.0003;
-      mesh.rotation.y += 0.0005;
-      mesh.rotation.x += 0.0002;
+      // Slower on every axis — a stately turn, the unhurried confidence the
+      // brand asks for, not a restless spin.
+      material.uniforms.time.value = t * 0.0002;
+      mesh.rotation.y += 0.00026;
+      mesh.rotation.x += 0.0001;
       renderer.render(scene, camera);
       frameId = requestAnimationFrame(animate);
     };
