@@ -38,7 +38,7 @@ export function AboutSection() {
 
             <div className="mt-10 space-y-8 text-lg md:text-xl leading-relaxed text-[hsl(var(--gray-300)/0.9)]">
               <Reveal delay={200}>
-                <p>
+                <p className="drop-cap">
                   Crestmont Consulting works with a small circle of founders,
                   owners, and decision-makers operating at the level where the
                   stakes are real and the margin for error is gone. We turn

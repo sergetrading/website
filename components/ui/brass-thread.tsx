@@ -1,75 +1,118 @@
 "use client";
 
-import React, { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import React, { useEffect, useState } from "react";
 
 /**
- * The brass thread, made literal.
+ * The brass thread, made into navigation.
  *
- * Until now "the thread" was only a metaphor — the brass hairlines that top
- * every section. This draws a single continuous vertical line down the left
- * content edge that GROWS with scroll, physically stitching About → Services →
- * Contact into one piece. A faint glowing node rides the leading edge: the one
- * point of light on the page, justified as the head of the thread being pulled
- * through.
+ * It started as a decorative line; here it becomes the site's spine AND its
+ * wayfinding. A fixed vertical thread on the left margin, hidden over the hero,
+ * fading in once you enter the content. Each section is a node; the active one
+ * glows and names itself, the fill rises to meet it, and a click travels there.
+ * No conventional navbar — the red thread *is* the orientation.
  *
- * Aligned to the same `max-w-6xl` + `px-6/px-10` gutter the sections use, so it
- * lands exactly on their left rail. Desktop only (md+) — on narrow screens the
- * margin is too tight for it to read as anything but clutter. Decorative, so it
- * is hidden from assistive tech and lets every click pass through.
+ * Desktop only (lg+) — on narrow screens the margin can't hold it without
+ * clutter, and the page is short enough to simply scroll.
  */
-export function ThreadedSections({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
 
-  // Progress as the block travels through the viewport. The thread reaches the
-  // foot of the page slightly before the very end, so Contact resolves on a
-  // completed line rather than one still visibly drawing.
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.65", "end 0.9"],
-  });
+const SECTIONS = [
+  { id: "about", label: "About" },
+  { id: "services", label: "Practice" },
+  { id: "method", label: "Method" },
+  { id: "contact", label: "Enquiry" },
+] as const;
 
-  // Long, heavy settle — the line follows the scroll with luxurious lag rather
-  // than snapping 1:1 to the wheel.
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 26,
-    mass: 0.5,
-  });
+export function ThreadNav() {
+  const [active, setActive] = useState(0);
+  const [visible, setVisible] = useState(false);
 
-  const height = useTransform(progress, [0, 1], ["0%", "100%"]);
+  // Reveal the thread only once the hero is behind us.
+  useEffect(() => {
+    const onScroll = () =>
+      setVisible(window.scrollY > window.innerHeight * 0.55);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Active node = whichever section currently sits across the viewport middle.
+  useEffect(() => {
+    const els = SECTIONS.map((s) => document.getElementById(s.id)).filter(
+      (el): el is HTMLElement => el !== null
+    );
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const i = SECTIONS.findIndex((s) => s.id === e.target.id);
+            if (i >= 0) setActive(i);
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  const go = (id: string) =>
+    document
+      .getElementById(id)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const fill = (active / (SECTIONS.length - 1)) * 100;
 
   return (
-    <div ref={ref} className="relative">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-30 hidden md:block"
-      >
-        <div className="relative mx-auto h-full max-w-6xl px-6 md:px-10">
-          {/* faint full-height track the thread is drawn over */}
-          <div className="absolute inset-y-0 left-6 w-px bg-[hsl(var(--brass)/0.1)] md:left-10">
-            {/* the drawn thread — brass intensifying toward the leading edge */}
-            <motion.div
-              style={{ height: reduce ? "100%" : height }}
-              className="absolute inset-x-0 top-0 w-px bg-gradient-to-b from-[hsl(var(--brass)/0.15)] via-[hsl(var(--brass)/0.6)] to-[hsl(var(--brass))]"
-            >
-              {/* glowing node at the head of the thread */}
-              {!reduce && (
-                <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[hsl(var(--brass))] shadow-[0_0_10px_2px_hsl(var(--brass)/0.7)]" />
-              )}
-            </motion.div>
-          </div>
-        </div>
-      </div>
+    <nav
+      aria-label="Sections"
+      className={`fixed left-8 top-1/2 z-40 hidden -translate-y-1/2 lg:block transition-opacity duration-700 ${
+        visible ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+    >
+      <ul className="relative flex flex-col gap-12">
+        {/* faint track + brass fill that rises to the active node */}
+        <span
+          className="absolute left-[3px] top-1.5 bottom-1.5 w-px bg-[hsl(var(--brass)/0.16)]"
+          aria-hidden
+        />
+        <span
+          className="absolute left-[3px] top-1.5 w-px bg-gradient-to-b from-[hsl(var(--brass)/0.4)] to-[hsl(var(--brass))] transition-[height] duration-700 ease-out"
+          style={{ height: `calc((100% - 0.75rem) * ${fill / 100})` }}
+          aria-hidden
+        />
 
-      {children}
-    </div>
+        {SECTIONS.map((s, i) => {
+          const isActive = i === active;
+          return (
+            <li key={s.id} className="relative">
+              <button
+                type="button"
+                onClick={() => go(s.id)}
+                className="group flex items-center gap-4"
+                aria-current={isActive ? "true" : undefined}
+              >
+                <span
+                  className={`relative h-[7px] w-[7px] shrink-0 rounded-full border transition-all duration-300 ${
+                    isActive
+                      ? "border-transparent bg-[hsl(var(--brass))] shadow-[0_0_8px_1px_hsl(var(--brass)/0.6)]"
+                      : "border-[hsl(var(--brass)/0.5)] bg-transparent group-hover:border-[hsl(var(--brass))]"
+                  }`}
+                />
+                <span
+                  className={`whitespace-nowrap text-[0.625rem] uppercase tracking-[0.35em] transition-all duration-300 ${
+                    isActive
+                      ? "translate-x-0 text-[hsl(var(--foreground))] opacity-100"
+                      : "-translate-x-1 text-[hsl(var(--gray-300)/0.7)] opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                  }`}
+                  style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                >
+                  {s.label}
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }

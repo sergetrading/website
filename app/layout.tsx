@@ -45,9 +45,24 @@ const signature = Herr_Von_Muellerhoff({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://crestmont.consulting"),
   title: "Crestmont Consulting — Strategy · Advisory · Transformation",
   description:
     "Crestmont Consulting partners with a small circle of founders and decision-makers to sharpen strategy, unlock growth, and deliver change that lasts.",
+  openGraph: {
+    title: "Crestmont Consulting — Strategy · Advisory · Transformation",
+    description:
+      "Quiet counsel for founders and decision-makers operating where the stakes are real. Strategy, advisory, and transformation — for the few.",
+    siteName: "Crestmont Consulting",
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Crestmont Consulting",
+    description:
+      "Quiet counsel for founders and decision-makers. Built for the few.",
+  },
 };
 
 export default function RootLayout({

@@ -100,6 +100,18 @@ h3 {
   }
 }
 
+/* Editorial drop cap — the opening letter of the About manifesto, set large in
+   Fraunces and inked in brass. The one place type behaves like print. */
+.drop-cap::first-letter {
+  float: left;
+  margin: 0.02em 0.09em 0 0;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 500;
+  font-size: 3.6em;
+  line-height: 0.74;
+  color: hsl(var(--brass));
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

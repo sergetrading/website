@@ -39,6 +39,14 @@ export function SiteFooter() {
             ))}
           </nav>
         </div>
+
+        {/* Colophon — the quiet maker's note that signals craft. */}
+        <p
+          className="mt-10 text-center text-[0.625rem] uppercase tracking-[0.3em] text-[hsl(var(--gray-300)/0.32)]"
+          style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+        >
+          Set in Fraunces &amp; Montserrat · Paphos, Cyprus
+        </p>
       </div>
     </footer>
   );
