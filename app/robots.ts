@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 
 const BASE = "https://crestmont.consulting";
 
+// Required for the `output: export` (GitHub Pages) build to emit this route.
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {

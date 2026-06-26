@@ -6,6 +6,11 @@ export const alt = "Crestmont Consulting — Strategy · Advisory · Transformat
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// Required for `output: export` (the GitHub Pages build): without it Next can't
+// statically emit this generated route and the export fails. No effect on the
+// standalone/VPS build, where the route is generated on demand.
+export const dynamic = "force-static";
+
 export default function OpengraphImage() {
   return new ImageResponse(
     (
