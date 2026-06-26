@@ -64,6 +64,34 @@ export function AboutSection() {
                 </p>
               </Reveal>
             </div>
+
+            {/* Founder's signature — the section closes on a personal note */}
+            <Reveal delay={440}>
+              <figure className="mt-14">
+                <span
+                  className="h-px w-10 bg-[hsl(var(--brass)/0.5)] block"
+                  aria-hidden
+                />
+                <span
+                  className="mt-6 block origin-left -rotate-[3deg] text-5xl md:text-6xl leading-[0.9] text-[hsl(var(--brass))]"
+                  style={{
+                    fontFamily: "var(--font-signature), cursive",
+                    // the finest nib lines — keep the ink barely raised, no glow
+                    textShadow: "0 1px 1px hsl(var(--background)/0.45)",
+                  }}
+                >
+                  Sergej Hoffmann
+                </span>
+                <figcaption className="mt-4">
+                  <span
+                    className="block text-xs font-light uppercase tracking-[0.35em] text-[hsl(var(--gray-300)/0.7)]"
+                    style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                  >
+                    Founder &amp; CEO
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
           </div>
         </div>
       </div>
