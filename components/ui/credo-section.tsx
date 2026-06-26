@@ -10,15 +10,16 @@ import { MaskReveal, Reveal } from "@/components/ui/motion";
  * to be loud: a clamped display size that runs larger than any other headline,
  * centred on a lot of black, opened by an oversized Fraunces quotation mark set
  * in solid brass — the one place besides the founder's signature where the
- * accent is fully present rather than a hairline. A faint warm halo lifts the
- * ground just enough to read as a stage. Authority by restraint, not bragging:
- * no logos, no numbers, only a maxim the brand stands behind.
+ * accent is fully present rather than a hairline. It sits on the raised "stage"
+ * ground, and a faint warm halo lifts it further still: the crescendo is the
+ * page literally stepping up onto a lit plane. Authority by restraint, not
+ * bragging: no logos, no numbers, only a maxim the brand stands behind.
  */
 export function CredoSection() {
   return (
     <section
       id="credo"
-      className="relative w-full overflow-hidden bg-[hsl(var(--background))] py-44 text-[hsl(var(--foreground))] md:py-72"
+      className="relative w-full overflow-hidden bg-[hsl(var(--background-raised))] py-44 text-[hsl(var(--foreground))] md:py-72"
     >
       {/* brass hairline — same thread that tops every section */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--brass)/0.4)] to-transparent" />

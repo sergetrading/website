@@ -51,7 +51,7 @@ export function GenerativeArtScene() {
         time: { value: 0 },
         pointLightPos: { value: new THREE.Vector3(0, 0, 5) },
         // THREE.Color cannot parse a CSS custom property, so we pass the
-        // resolved --sky-300 (white) value directly.
+        // resolved hex value directly.
         // Brass, not cold white — the hero is now made of the same single
         // accent as the rest of the site, so it reads as an engraved instrument
         // rather than a sci-fi render. (#c4a978 = the --brass token.)

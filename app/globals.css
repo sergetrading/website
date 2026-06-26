@@ -19,7 +19,6 @@
      is ~3% lightness: felt, not seen. */
   --background-raised: 36 14% 7%; /* #14110d */
   --foreground: 40 30% 95%; /* #f6f3ec — ivory */
-  --sky-300: 40 30% 95%; /* hero accent text — ivory */
   --gray-300: 40 8% 70%; /* warm neutral for body copy */
   --brass: 38 40% 63%; /* #c4a978 — the single accent, used sparingly */
 }
@@ -30,7 +29,6 @@
   --color-foreground: hsl(var(--foreground));
   --color-brass: hsl(var(--brass));
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-fraunces);
 }
 

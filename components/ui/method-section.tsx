@@ -9,6 +9,8 @@ import { Reveal, MaskReveal } from "@/components/ui/motion";
  * the process, told in language rather than diagrams or icons, in the same
  * left-rail grammar as the rest of the page. Roman numerals (not the Arabic
  * 01/02/03 of Practice) so two sequential lists never read as the same module.
+ * Sits on the raised "stage" ground — the page's second lifted plane after
+ * Credo — so the alternating base/raised rhythm gives the long scroll depth.
  */
 
 const steps = [
@@ -38,7 +40,7 @@ export function MethodSection() {
   return (
     <section
       id="method"
-      className="relative w-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))] py-32 md:py-48 overflow-hidden"
+      className="relative w-full bg-[hsl(var(--background-raised))] text-[hsl(var(--foreground))] py-32 md:py-48 overflow-hidden"
     >
       {/* brass hairline divider */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--brass)/0.4)] to-transparent" />

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {
   Geist,
-  Geist_Mono,
   Montserrat,
   Fraunces,
   Herr_Von_Muellerhoff,
@@ -11,11 +10,6 @@ import { Atmosphere } from "@/components/ui/atmosphere";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -73,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${fraunces.variable} ${signature.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${montserrat.variable} ${fraunces.variable} ${signature.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {/* No-JS safety net: scroll-reveal elements render hidden until Framer

@@ -10,9 +10,10 @@ import { Reveal, MaskReveal } from "@/components/ui/motion";
  * are three *parallel* disciplines, not a sequence, so they're set as a
  * horizontal triptych and carry no 01/02/03 numerals (numbering would imply an
  * order that isn't there — Method earns its numerals because it genuinely is a
- * sequence). The section sits on the raised "stage" ground so two adjacent
- * content modules never read as one flat sheet. The brass thread is split into
- * three short caps, one over each column.
+ * sequence). In the page's plane rhythm this section is the trough on the base
+ * ground, sitting between two raised "stages" (Credo above, Method below) so the
+ * page reads as space being moved through, never one flat sheet. The brass
+ * thread is split into three short caps, one over each column.
  */
 
 const disciplines = [
@@ -34,7 +35,7 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="relative w-full bg-[hsl(var(--background-raised))] text-[hsl(var(--foreground))] py-32 md:py-48 overflow-hidden"
+      className="relative w-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))] py-32 md:py-48 overflow-hidden"
     >
       {/* brass hairline divider — the thread, topping the section as everywhere */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--brass)/0.4)] to-transparent" />

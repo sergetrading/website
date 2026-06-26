@@ -89,12 +89,22 @@ export function AnomalousMatterHero({
           }}
         >
           <div className="max-w-3xl px-4 animate-fade-in-long">
-          <h1 className="text-sm font-mono tracking-widest text-[hsl(var(--sky-300)/0.8)] uppercase">
-            {title}
-          </h1>
-          <p className="mt-4 font-serif text-3xl md:text-5xl font-normal leading-[1.08] tracking-[-0.02em]">
-            {subtitle}
+          {/* Eyebrow — set in the same Montserrat / brass-hairline grammar that
+              every section eyebrow repeats below, so the hero *introduces* the
+              page's vocabulary instead of speaking a leftover mono dialect. The
+              hairline is the first appearance of the brass thread that then runs
+              the length of the page. The proposition (not this label) carries
+              the h1 — it's the meaningful line. */}
+          <p
+            className="flex flex-col items-center gap-4 text-[0.625rem] md:text-xs font-light uppercase tracking-[0.4em] text-[hsl(var(--gray-300)/0.85)]"
+            style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+          >
+            <span className="h-px w-8 bg-[hsl(var(--brass)/0.6)]" aria-hidden />
+            <span>{title}</span>
           </p>
+          <h1 className="mt-6 font-serif text-3xl md:text-5xl font-normal leading-[1.08] tracking-[-0.02em]">
+            {subtitle}
+          </h1>
           <p className="mt-6 max-w-xl mx-auto text-base leading-relaxed text-[hsl(var(--gray-300)/0.8)]">
             {description}
           </p>
