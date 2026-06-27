@@ -80,7 +80,7 @@ export function AboutSection() {
                     textShadow: "0 1px 1px hsl(var(--background)/0.45)",
                   }}
                 >
-                  Sergej Hoffmann
+                  Serge Hoffmann
                 </span>
                 <figcaption className="mt-4">
                   <span

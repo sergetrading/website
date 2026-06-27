@@ -35,7 +35,12 @@ export function LegalLayout({
         </div>
 
         <article className="max-w-3xl mx-auto px-6 md:px-10 py-20 md:py-28">
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{title}</h1>
+          <h1
+            className="text-3xl md:text-5xl font-bold tracking-tight"
+            style={{ fontFamily: "var(--font-fraunces), serif" }}
+          >
+            {title}
+          </h1>
 
           <div className="mt-12 space-y-10 text-base md:text-lg leading-relaxed text-[hsl(var(--gray-300)/0.9)]">
             {children}
@@ -61,7 +66,10 @@ export function LegalLayout({
 /** Small section heading used inside the legal pages. */
 export function LegalHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-xl md:text-2xl font-bold tracking-tight text-[hsl(var(--foreground))]">
+    <h2
+      className="text-xl md:text-2xl font-bold tracking-tight text-[hsl(var(--foreground))]"
+      style={{ fontFamily: "var(--font-fraunces), serif" }}
+    >
       {children}
     </h2>
   );

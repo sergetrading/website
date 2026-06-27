@@ -48,8 +48,22 @@ export default function PrivacyPolicyPage() {
           GDPR.
         </p>
         <p>
-          Hosting provider:{" "}
-          <Placeholder>Name &amp; address of the host</Placeholder>.
+          Hosting provider:
+          <br />
+          HOSTINGER operations, UAB
+          <br />
+          Švitrigailos str. 34, Vilnius 03230, Lithuania
+        </p>
+        <p>
+          The website is hosted on a virtual private server located in a data
+          centre in Frankfurt am Main, Germany (EU). No transfer of personal
+          data to a third country outside the EU/EEA takes place in connection
+          with the hosting.
+        </p>
+        <p>
+          As the hosting provider processes personal data on our behalf, a data
+          processing agreement pursuant to Art. 28 GDPR is in place with the
+          provider.
         </p>
       </section>
 
